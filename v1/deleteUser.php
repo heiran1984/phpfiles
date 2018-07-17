@@ -1,0 +1,6 @@
+<?php
+require_once '../includes/DbOperations.php';
+    $response=array();
+    $db=new DbOperations();
+    $db->deleteUser($_GET['string']);
+?>
