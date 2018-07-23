@@ -11,6 +11,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
       $response['id']=$user['id'];
       $response['mojodi']=$user['mojodi'];
       $response['username']=$user['username'];
+      $response['password']=$user['password'];
     }else{
       $response['error']=true;
       $response['message']="Invalid username or password";
