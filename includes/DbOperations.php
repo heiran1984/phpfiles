@@ -13,6 +13,19 @@ class DbOperations
     $this->con=$db->connect();
   }
 
+  public function changePass($id,$pass){
+    $password=md5($pass);
+    $stmt=$this->con->prepare("UPDATE users SET password=? WHERE id=?");
+    $stmt->bindValue("1",$password);
+    $stmt->bindValue("2",$id);
+
+    if($stmt->execute())
+      return 1;
+    else
+      return 0;
+
+  }
+
   public function createUser($username,$pass,$mojodi,$edit){
     if($this->isUserExist($username)&&$edit==0){
       return 0;
@@ -473,17 +486,6 @@ class DbOperations
     return $data;
   }
 
-  public function backup(){
-    $server_name='localhost';
-    $username= 'root';
-    $password='';
-    $database_name='Sandoogh';
-    $date_string= date("Ymd");
 
-    $cmd = "mysqldump -h {$server_name} -u {$username} -p {$password} {$database_name} > {$date_string}_{$database_name}.sql";
-
-    exec($cmd);
-
-  }
 }
  ?>
